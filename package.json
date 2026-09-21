@@ -5,34 +5,29 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "dev:backend": "tsx watch backend/src/server.ts",
-    "dev:all": "pnpm dev & pnpm dev:backend",
+    "dev:all": "pnpm --parallel --filter koda --filter @koda/backend dev",
     "build": "tsc -b && vite build",
-    "build:backend": "tsc -p backend/tsconfig.json",
-    "typecheck": "tsc -b && tsc -p backend/tsconfig.json --noEmit",
+    "typecheck": "tsc -b",
     "lint": "oxlint",
-    "start:backend": "tsx backend/src/server.ts",
     "preview": "vite preview"
   },
   "dependencies": {
     "clsx": "^2.1.1",
-    "express": "^5.2.1",
     "lucide-react": "^1.47.0",
+    "motion": "^12.23.24",
     "react": "^19.2.8",
     "react-dom": "^19.2.8",
     "react-router-dom": "^7.18.4",
-    "zod": "^4.6.5"
+    "vanilla-colorful": "^0.7.2"
   },
   "devDependencies": {
     "@tailwindcss/vite": "^4.3.3",
-    "@types/express": "^5.0.6",
     "@types/node": "^24.13.3",
     "@types/react": "^19.2.18",
     "@types/react-dom": "^19.2.7",
     "@vitejs/plugin-react": "^6.1.1",
     "oxlint": "^1.81.0",
     "tailwindcss": "^4.3.3",
-    "tsx": "^4.23.15",
     "typescript": "~6.0.2",
     "vite": "^8.3.0"
   }

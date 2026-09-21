@@ -1,17 +1,13 @@
 import { Laptop, Moon, Sun } from 'lucide-react'
-import { useTheme, type Theme } from '../../app/theme'
-
-const options: { value: Theme; label: string; icon: typeof Sun }[] = [
-  { value: 'light', label: 'Tema terang', icon: Sun },
-  { value: 'dark', label: 'Tema gelap', icon: Moon },
-  { value: 'system', label: 'Ikuti sistem', icon: Laptop },
-]
+import { useTheme } from '../../app/theme'
 
 export function ThemeSwitcher() {
   const { theme, setTheme } = useTheme()
-  const currentIndex = options.findIndex((option) => option.value === theme)
-  const Icon = options[currentIndex].icon
-  const cycleTheme = () => setTheme(options[(currentIndex + 1) % options.length].value)
+  const options = [
+    { value: 'light' as const, label: 'Terang', icon: Sun },
+    { value: 'dark' as const, label: 'Gelap', icon: Moon },
+    { value: 'system' as const, label: 'Sistem', icon: Laptop },
+  ]
 
-  return <button type="button" onClick={cycleTheme} title={options[currentIndex].label} aria-label={`${options[currentIndex].label}. Klik untuk mengganti tema.`} className="rounded-lg border border-slate-200 p-2 text-slate-600 transition-colors hover:bg-slate-100 dark:border-white/10 dark:text-slate-300 dark:hover:bg-white/10"><Icon size={18} /></button>
+  return <div className="flex rounded-md border border-slate-200 bg-slate-50 p-0.5 dark:border-white/10 dark:bg-white/5" aria-label="Pilihan tema">{options.map(({value,label,icon:Icon}) => <button key={value} type="button" onClick={() => setTheme(value)} title={label} aria-label={`Tema ${label}`} className={`rounded-[4px] p-1.5 transition-colors ${theme === value ? 'bg-white text-slate-900 shadow-sm dark:bg-white/10 dark:text-white' : 'text-slate-400 hover:text-slate-700 dark:hover:text-slate-200'}`}><Icon size={15}/></button>)}</div>
 }
